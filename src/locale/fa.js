@@ -56,13 +56,16 @@ export default {
       passwordRequired: 'کلمه عبور الزامی است',
       phoneNumberRequired: 'شماره موبایل الزامی است',
       emailRequired: 'پست الکترونیکی الزامی است',
-      passwordValidation: 'حداقل تعداد کاراکتر برای کلمه عبور ۸ کاراکتر است',
+      passwordValidation: 'پسورد باید شامل حداقل 8 کاراکتر از حروف بزرگ و کوچک انگلیسی، اعداد صحیح و علامت‌های @$!%*?& باشد',
       emailValidation: 'فرمت پست الکترونیکی اشتباه است',
       emailStatus: 'پست الکترونیکی شما به عنوان نام کاربری بوده و غیر قابل تغییر است',
       phoneNumberValidation: 'فرمت شماره موبایل اشتباه است',
       phoneNumberCountValidation: 'شماره موبایل باید 11 رقمی باشد',
       nameValidation: 'لطفا نام را با حروف فارسی وارد کنید',
-      lastNameValidation: 'لطفا نام خانوادگی را با حروف فارسی وارد کنید'
+      lastNameValidation: 'لطفا نام خانوادگی را با حروف فارسی وارد کنید',
+      fullname: 'نام و نام خانوادگی',
+      fullnameRequired: 'نام و نام خانوادگی الزامی است',
+      fullnameValidation: 'لطفا نام و نام خانوادگی را با حروف فارسی وارد کنید'
     },
     forgotPassword: {
       title: 'بازیابی کلمه عبور',
@@ -88,7 +91,7 @@ export default {
       passwordPlaceholder: '********',
       passwordRequired: 'کلمه عبور جدید الزامی است',
       newPasswordRequired: 'تکرار کلمه عبور جدید الزامی است',
-      passwordValidation: 'حداقل تعداد کاراکتر برای کلمه عبور 8 کاراکتر است',
+      passwordValidation: 'پسورد باید شامل حداقل 8 کاراکتر از حروف بزرگ و کوچک انگلیسی، اعداد صحیح و علامت‌های @$!%*?& باشد',
       newPasswordValidation: 'کلمه عبور با تکرار کلمه عبور یکسان نیست'
     },
     filterBox: {

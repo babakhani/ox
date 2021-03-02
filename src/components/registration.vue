@@ -2,178 +2,187 @@
   <div class="register-component">
     <v-card
       flat
-      class="transparent"
-      :dark="isDark">
+      class="transparent mx-auto"
+      style="max-width: 320px;"
+      :dark="isDark"
+    >
       <v-row
         v-if="titleEnabled"
         class="justify-center form-title pb-4"
+      > {{ $t('components.register.title') }} </v-row>
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="register"
+      >
+        <!-- fullname -->
+        <div
+          v-if="fullnameEnabled"
+          class="subtitle-2"
         >
-        {{$t('components.register.title')}}
-      </v-row>
-      <v-form ref="form" v-model="valid" @submit.prevent="register">
-      <!-- email -->
-      <div v-if="emailEnabled" class="subtitle-2 input-placeholder-left">
-        <v-icon v-if="solo && iconEnabled" col medium color="darken-2" class="ml-3">mdi-email</v-icon>
-        <span v-if="solo">{{emailTitle}}</span>
-        <v-text-field
-          v-model="userInfo.email"
-          autofocus
-          tabindex="1"
-          :solo="solo"
-          :outlined="outlined"
-          flat
-          color="primary"
-          class="mt-2"
-          :label="emailTitle"
-          :placeholder="emailPlaceholder"
-          :rules="emailValidation"
-          :prepend-icon="outlined && iconEnabled ? 'mdi-email' : ''"
-          name="email"
-          :hint="$t('components.register.emailStatus')"
-          type="text"
-          required
-        ></v-text-field>
-      </div>
-      <!-- name -->
-      <div v-if="nameEnabled"  class="subtitle-2">
-        <v-icon v-if="solo && iconEnabled" medium color="darken-2" class="ml-3">mdi-account-circle</v-icon>
-        <span v-if="solo">{{nameTitle}}</span>
-        <v-text-field
-          v-model="userInfo.name"
-          tabindex="2"
-          :solo="solo"
-          :outlined="outlined"
-          flat
-          color="primary"
-          class="mt-2"
-          :label="nameTitle"
-          :placeholder="namePlaceholder"
-          :rules="nameRequiredEnabled ? [nameRules.required, nameRules.pattern] : [] "
-          :prepend-icon="outlined && iconEnabled ? 'mdi-account-circle' : ''"
-          name="name"
-          type="text"
-          required
-        ></v-text-field>
-      </div>
-      <!-- last name -->
-      <div v-if="lastNameEnabled" class="subtitle-2">
-        <v-icon v-if="solo && iconEnabled" medium color="darken-2" class="ml-3">mdi-account-circle</v-icon>
-        <span v-if="solo">{{lastNameTitle}}</span>
-        <v-text-field
-          v-model="userInfo.lastName"
-          tabindex="3"
-          :solo="solo"
-          :outlined="outlined"
-          flat
-          color="primary"
-          class="mt-2"
-          :label="lastNameTitle"
-          :placeholder="lastNamePlaceholder"
-          :rules="lastNameRequiredEnabled ? [lastNameRules.required, lastNameRules.pattern] : [] "
-          name="lastName"
-          :prepend-icon="outlined && iconEnabled ? 'mdi-account-circle' : ''"
-          type="text"
-          required
-        ></v-text-field>
-      </div>
-      <!-- password  -->
-      <div v-if="passwordEnabled" class="subtitle-2 input-placeholder-left">
-        <v-icon  v-if="solo && iconEnabled" medium color="darken-2" class="ml-3">mdi-lock</v-icon>
-        <span v-if="solo">{{passwordTitle}}</span>
-        <v-text-field
-          v-model="userInfo.password"
-          tabindex="4"
-          :solo="solo"
-          :outlined="outlined"
-          flat
-          color="primary"
-          class="mt-2"
-          :prepend-inner-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="passwordValidation"
-          :label="passwordTitle"
-          :placeholder="passwordPlaceholder"
-          :prepend-icon="outlined && iconEnabled ? 'mdi-lock' : ''"
-          name="password"
-          :type="showPass ? 'text' : 'password'"
-          required
-          @click:prepend-inner="showPass = !showPass"
-        ></v-text-field>
-      </div>
-      <!-- phone number -->
-      <div v-if="phoneNumberEnabled" class="subtitle-2 input-placeholder-left">
-        <v-icon  v-if="solo && iconEnabled" medium color="darken-2" class="ml-3">mdi-cellphone-iphone</v-icon>
-        <span v-if="solo">{{phoneNumberTitle}}</span>
-        <v-text-field
-          :value="userInfo.phoneNumber"
-          tabindex="5"
-          :solo="solo"
-          :outlined="outlined"
-          flat
-          color="primary"
-          class="mt-2"
-          :rules="phoneNumberValidation"
-          :label="phoneNumberTitle"
-          :placeholder="phoneNumberPlaceholder"
-          @input="onPhoneNumberChange"
-          :prepend-icon="outlined && iconEnabled ? 'mdi-cellphone-iphone' : ''"
-          name="phoneNumber"
-          type="text"
-          required
+          <v-text-field
+            v-model="userInfo.fullname"
+            tabindex="2"
+            :outlined="outlined"
+            flat
+            class="text-subtitle-2"
+            dir="rtl"
+            color="primary"
+            :label="fullnameTitle"
+            :rules="fullnameRequiredEnabled ? [fullnameRules.required, fullnameRules.pattern] : [] "
+            name="fullname"
+            type="text"
+            required
           ></v-text-field>
-      </div>
-      <!-- role -->
-      <v-row
-        class='justify-center'
+        </div>
+        <template v-else>
+          <!-- name -->
+          <div
+            v-if="nameEnabled"
+            class="subtitle-2"
+          >
+            <v-text-field
+              v-model="userInfo.name"
+              tabindex="2"
+              :outlined="outlined"
+              flat
+              class="text-subtitle-2"
+              dir="rtl"
+              color="primary"
+              :label="nameTitle"
+              :rules="nameRequiredEnabled ? [nameRules.required, nameRules.pattern] : [] "
+              name="name"
+              type="text"
+              required
+            ></v-text-field>
+          </div>
+          <!-- last name -->
+          <div
+            v-if="lastNameEnabled"
+            class="subtitle-2"
+          >
+            <v-text-field
+              v-model="userInfo.lastName"
+              tabindex="3"
+              :outlined="outlined"
+              flat
+              class="text-subtitle-2"
+              dir="rtl"
+              color="primary"
+              :label="lastNameTitle"
+              :rules="lastNameRequiredEnabled ? [lastNameRules.required, lastNameRules.pattern] : [] "
+              name="lastName"
+              type="text"
+              required
+            ></v-text-field>
+          </div>
+        </template>
+        <!-- email -->
+        <div
+          v-if="emailEnabled"
+          class="subtitle-2 input-placeholder-left"
         >
-        <v-checkbox
-          v-model="userInfo.agreeRules"
-          tabindex="6"
-          :color="checkBoxColor"
-          :label="$t('components.register.rules')"
-          :rules="[agreeRulesRules.required]"
-          required
+          <v-text-field
+            v-model="userInfo.email"
+            autofocus
+            tabindex="1"
+            :outlined="outlined"
+            class="text-subtitle-2"
+            dir="ltr"
+            flat
+            color="primary"
+            :label="emailTitle"
+            :rules="emailValidation"
+            name="email"
+            :hint="$t('components.register.emailStatus')"
+            type="text"
+            required
+          ></v-text-field>
+        </div>
+        <!-- password  -->
+        <div
+          v-if="passwordEnabled"
+          class="subtitle-2 input-placeholder-left"
         >
-          <template v-slot:label>
-            <v-btn
-              text
-              small
-              @click="onOpenTermsAndConditions"
-            >
-              {{$t('components.register.rules')}}
-            </v-btn>
-          </template>
-        </v-checkbox>
-      </v-row>
-      <!-- register btn -->
-      <v-row class="justify-center mx-0">
-        <v-btn
-          tabindex="7"
-          type="submit"
-          :width="buttonWidth"
-          :block="isButtonFullWidth"
-          :x-large="isButtonLarge"
-          :disabled="!valid"
-          :loading="isLoading"
-          class="white--text"
-          :color="registerButtonColor">
-          {{registerButtonTitle}}
-        </v-btn>
-      </v-row>
-      <!-- login link -->
-      <v-row
-        class="justify-center py-4 subtitle-2"
+          <v-text-field
+            v-model="userInfo.password"
+            tabindex="4"
+            :outlined="outlined"
+            flat
+            class="text-subtitle-2"
+            dir="ltr"
+            color="primary"
+            :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="passwordValidation"
+            :label="passwordTitle"
+            name="password"
+            :type="showPass ? 'text' : 'password'"
+            :hint="$t('components.register.passwordValidation')"
+            required
+            @click:append="showPass = !showPass"
+          ></v-text-field>
+        </div>
+        <!-- phone number -->
+        <div
+          v-if="phoneNumberEnabled"
+          class="subtitle-2 input-placeholder-left"
         >
-        <span class="py-1">{{ $t('components.register.haveAccount') }}</span>
-        <v-btn
-          text
-          :color="loginLinkColor"
-          small
-          class="px-0 text-decoration-underline"
-          :to="{ name: loginRoute}">
-          {{ loginLinkTitle }}
-        </v-btn>
-      </v-row>
-    </v-form>
+          <v-text-field
+            :value="userInfo.phoneNumber"
+            tabindex="5"
+            :outlined="outlined"
+            flat
+            class="text-subtitle-2"
+            dir="ltr"
+            color="primary"
+            :rules="phoneNumberValidation"
+            :label="phoneNumberTitle"
+            name="phoneNumber"
+            type="text"
+            required
+            @input="onPhoneNumberChange"
+          ></v-text-field>
+        </div>
+        <!-- role -->
+        <v-row
+          class='justify-center my-3'
+        >
+          <span
+            class="text-caption terms-agreement primary--text"
+            style="max-width: 240px; text-align: center; cursor: pointer;"
+            @click="onOpenTermsAndConditions"
+          > {{ $t('components.register.rules') }} </span>
+        </v-row>
+        <!-- register btn -->
+        <v-row
+          class="justify-center mx-0 pt-2"
+        >
+          <v-btn
+            tabindex="6"
+            type="submit"
+            :width="buttonWidth"
+            :block="isButtonFullWidth"
+            :x-large="isButtonLarge"
+            :disabled="!valid"
+            :loading="isLoading"
+            class="white--text"
+            :color="registerButtonColor"
+          > {{ registerButtonTitle }} </v-btn>
+        </v-row>
+        <!-- login link -->
+        <v-row
+          class="justify-center py-4 subtitle-2"
+        >
+          <span
+            class="my-2"
+          > {{ $t('components.register.haveAccount') }} </span>
+          <v-btn
+            class="primary--text text-caption px-0"
+            text
+            @click="$router.push({ name: loginRoute })"
+          > {{ loginLinkTitle }} </v-btn>
+        </v-row>
+      </v-form>
     </v-card>
   </div>
 </template>
@@ -201,6 +210,10 @@
  * @property {String} [emailPatternMessage]
  * @property {Boolean} [emailRequiredEnabled=true]
  * @property {Boolean} [emailPatternEnabled=true]
+ * @property {Boolean} [fullnameEnabled]
+ * @property {String} [fullnameTitle]
+ * @property {String} [fullnameRequiredMessage]
+ * @property {Boolean} [fullnameRequiredEnabled=true]
  * @property {Boolean} [nameEnabled]
  * @property {String} [nameTitle]
  * @property {String} [namePlaceholder]
@@ -228,7 +241,7 @@
  * @property {Boolean} [phoneNumberRequiredEnabled=true]
  * @property {Boolean} [phoneNumberPatternEnabled=true]
  * @property {Boolean} [solo=true] - input theme is solo
- * @property {Boolean} [outlined=false] - input theme is outlined
+ * @property {Boolean} [outlined=true] - input theme is outlined
  * @property {Boolean} [iconEnabled=true]
  * @property {Boolean} [titleEnabled=true] - Specifies whether main title is displayed or not
  * @property {Boolean} [isButtonLarge=false] - Specifies Button is larger than usual or not
@@ -254,7 +267,7 @@ export default {
     },
     outlined: {
       type: Boolean,
-      default: false,
+      default: true,
       required: false
     },
     isDark: {
@@ -384,7 +397,7 @@ export default {
     },
     passwordPatternRegex: {
       type: String,
-      default: '/^(?=.*).{8,}/',
+      default: '/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9@$!%*?&]{8,})$/',
       required: false
     },
     passwordRequiredEnabled: {
@@ -441,6 +454,42 @@ export default {
       required: false
     },
     phoneNumberPatternEnabled: {
+      type: Boolean,
+      default: true,
+      required: false
+    },
+    fullnameEnabled: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    fullnameTitle: {
+      type: String,
+      default () {
+        return this.$t('components.register.fullname')
+      },
+      required: false
+    },
+    fullnameRequiredMessage: {
+      type: String,
+      default () {
+        return this.$t('components.register.fullnameRequired')
+      },
+      required: false
+    },
+    fullnamePatternRegex: {
+      type: String,
+      default: '/^[\u0600-\u06FF\u0020]+$/',
+      required: false
+    },
+    fullnamePatternMessage: {
+      type: String,
+      default () {
+        return this.$t('components.register.fullnameValidation')
+      },
+      required: false
+    },
+    fullnameRequiredEnabled: {
       type: Boolean,
       default: true,
       required: false
@@ -558,6 +607,7 @@ export default {
       userInfo: {
         password: '',
         phoneNumber: '',
+        fullname: '',
         name: '',
         lastName: '',
         email: '',
@@ -572,6 +622,10 @@ export default {
         required: value => !!value || this.phoneNumberRequiredMessage,
         pattern: value => RegExp(this.phoneNumberPatternRegex.substring(1, this.phoneNumberPatternRegex.length - 1)).test(value) || this.phoneNumberPatternMessage,
         counter: value => value.length === 11 || this.$t('components.register.phoneNumberCountValidation')
+      },
+      fullnameRules: {
+        required: value => !!value || this.fullnameRequiredMessage,
+        pattern: value => RegExp(this.fullnamePatternRegex.substring(1, this.fullnamePatternRegex.length - 1)).test(value) || this.fullnamePatternMessage
       },
       nameRules: {
         required: value => !!value || this.nameRequiredMessage,
@@ -660,105 +714,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  .register-component {
-    $active-color : #26a69a;
-    $input-text-color : #424242;
-    $placeholder-text : #a3a3a3;
-    $text-color-dark : #9c9c9c;
-    $input-color : #F3F7F9;
-    $input-hint : #1ABE75;
-    .form-title {
-      font-size : 20px;
-    }
-    .v-ripple__animation{
-      opacity: 0 !important;
-    }
-
-    .v-btn {
-      letter-spacing: 0;
-      &:before , &.v-btn--active {
-        background-color: transparent !important;
-      }
-    }
-
-    .theme--dark {
-      &.v-card {
-        color: $text-color-dark;
-        i {
-           color: $text-color-dark;
-        }
-      }
-      .v-icon {
-        color: $text-color-dark;
-      }
-      .form-title {
-        color : white;
-      }
-    }
-    .v-text-field .v-input__slot {
-      background: $input-color !important;
-    }
-    .v-input input::placeholder {
-      color: $placeholder-text !important;
-    }
-    .v-input input {
-      color: $input-text-color !important;
-    }
-    .v-text-field--placeholder{
-      font-size: 12px;
-    }
-    .input-placeholder-left{
-      input {
-        text-align: left;
-      }
-    }
-    .v-text-field--solo {
-      &.error--text {
-        .v-input__slot{
-          border: 2px solid !important;
-        }
-      }
-    }
-    .v-text-field .v-input__control {
-      min-height: 42px !important;
-    }
-    .v-text-field .v-input__slot {
-      border-radius: 5px !important;
-    }
-
-    .v-input--checkbox {
-      .v-label {
-        font-size: 12px !important;
-        text-decoration : underline;
-      }
-    }
-    .v-input--selection-controls {
-      margin-top: 0 !important;
-      padding-top: 0 !important;
-    }
-    .v-application--is-rtl .v-input--selection-controls__input {
-      margin-left: 15px !important;
-    }
-
-    .v-messages {
-      color: $input-hint !important;
-      min-height: 18px !important;
-    }
-
-    .v-text-field__details {
-      padding: 0 !important;
-      .error--text {
-        display: flex;
-        align-items: center;
-        &:before {
-          content: "\F0026";
-          font: normal normal normal 24px/1 "Material Design Icons";
-          font-size: 18px;
-          padding-left : .5rem;
-        }
-      }
-    }
-  }
-</style>

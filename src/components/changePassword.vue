@@ -30,7 +30,9 @@
           :prepend-icon="outlined && iconEnabled ? 'mdi-lock' : ''"
           name="password"
           :type="showPass ? 'text' : 'password'"
+          :hint="$t('components.changePassword.passwordValidation')"
           required
+          dir="ltr"
           @click:prepend-inner="showPass = !showPass"
         ></v-text-field>
       </div>
@@ -39,6 +41,7 @@
         <v-icon v-if="solo && iconEnabled" medium color="darken-2" class="ml-3">mdi-lock</v-icon>
         <span v-if="solo">{{ newPasswordTitle}}</span>
         <v-text-field
+          ref="newPassword"
           v-model="userPassword.newPassword"
           tabindex="2"
           :solo="solo"
@@ -54,6 +57,7 @@
           name="newPassword"
           :type="showNewPass ? 'text' : 'password'"
           required
+          dir="ltr"
           @click:prepend-inner="showNewPass = !showNewPass"
         ></v-text-field>
       </div>
@@ -259,7 +263,7 @@ export default {
     },
     passwordPatternRegex: {
       type: String,
-      default: '/^(?=.*).{8,}/',
+      default: '/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9@$!%*?&]{8,})$/',
       required: false
     },
     passwordRequiredEnabled: {
@@ -329,6 +333,13 @@ export default {
       this.$emit('changepassword', {
         password: this.userPassword.password
       })
+    }
+  },
+  watch: {
+    'userPassword.password': function () {
+      if (this.userPassword.newPassword) {
+        this.$refs.newPassword.validate()
+      }
     }
   }
 }

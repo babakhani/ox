@@ -11,7 +11,7 @@ export default function browserVersionCompatibility (isValid) {
           <span class="mdi mdi-alert-outline mdi-24px"></span>
         </div>
         <div class="alert-text">
-          مرورگر شما منسوخ شده است. لطفا مرورگر خود را به روز رسانی کنید.
+          مرورگر شما منسوخ شده است. لطفا مرورگر خود را به روز رسانی کنید.<br> <a href="https://www.google.com/chrome/" target="blank"> گوگل کروم </a> , <a href="https://www.mozilla.org/en-US/firefox/new/" target="blank"> فایرفاکس </a>
         </div>
       </div>
       <button class="alert-close">

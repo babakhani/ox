@@ -53,7 +53,7 @@ export default {
       passwordRequired: 'Password is required',
       phoneNumberRequired: 'Phone number is required',
       emailRequired: 'Email is required',
-      passwordValidation: 'Passwords must be at least 8 characters long',
+      passwordValidation: 'Passwords must be at least 8 characters long, capital and small letters, numbers and signs like @$!%*?&',
       emailValidation: 'Email is not valid',
       emailStatus: 'Your Email is your username and cannot be changed',
       phoneNumberValidation: 'Phone number format is not valid'
@@ -82,7 +82,7 @@ export default {
       passwordPlaceholder: '********',
       passwordRequired: 'Password is required',
       newPasswordRequired: 'Confirm new password is required',
-      passwordValidation: 'Passwords must be at least 8 characters long',
+      passwordValidation: 'Passwords must be at least 8 characters long, capital and small letters, numbers and signs like @$!%*?&',
       newPasswordValidation: 'Password is not the same as repeating password'
     },
     filterBox: {

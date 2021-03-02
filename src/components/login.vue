@@ -2,126 +2,119 @@
   <div class="login-component">
     <v-card
       flat
-      class="transparent"
-      :dark="isDark">
-    <v-row
-      v-if="titleEnabled"
-      class="justify-center form-title pb-4"
+      class="transparent mx-auto"
+      style="max-width: 320px;"
+      :dark="isDark"
+    >
+      <v-row
+        v-if="titleEnabled"
+        class="justify-center form-title pb-4"
       >
-      {{$t('components.login.login')}}
-    </v-row>
-    <v-form
-      ref="form"
-      v-model="valid"
-      @submit.prevent="onLogin">
-      <!-- email -->
-      <div
-        v-if="emailEnabled"
-        class="subtitle-2 input-placeholder-left pt-1">
-        <v-icon v-if="solo && iconEnabled" col medium color="darken-2" class="ml-3">mdi-email</v-icon>
-        <span v-if="solo">{{ emailTitle }}</span>
-        <v-text-field
-          v-model="userInfo.email"
-          autofocus
-          tabindex="1"
-          :solo="solo"
-          :outlined="outlined"
-          flat
-          color="primary"
-          class="mt-2"
-          :label="this.emailTitle"
-          :placeholder="this.emailPlaceholder"
-          :rules="emailValidation"
-          :prepend-icon="outlined && iconEnabled ? 'mdi-email' : ''"
-          name="email"
-          type="text"
-          required
-        ></v-text-field>
-      </div>
-      <!-- password  -->
-      <div
-        v-if="passwordEnabled"
-        class="w-100 subtitle-2 input-placeholder-left">
-        <v-icon v-if="solo && iconEnabled" medium color="darken-2" class="ml-3">mdi-lock</v-icon>
-        <span v-if="solo">{{ passwordTitle }}</span>
-        <v-text-field
-          v-model="userInfo.password"
-          tabindex="2"
-          :solo="solo"
-          :outlined="outlined"
-          flat
-          color="primary"
-          class="mt-2"
-          :prepend-inner-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="passwordValidation"
-          :label="this.passwordTitle"
-          :placeholder="this.passwordPlaceholder"
-          :prepend-icon="outlined && iconEnabled ? 'mdi-lock' : ''"
-          name="password"
-          :type="showPass ? 'text' : 'password'"
-          required
-          @click:prepend-inner="showPass = !showPass"
-        ></v-text-field>
-      </div>
-      <!------------>
-      <v-row>
-        <v-col class="pr-2 pl-3 d-flex justify-space-between" >
+        {{ $t('components.login.login') }}
+      </v-row>
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="onLogin"
+      >
+        <!-- email -->
+        <div
+          v-if="emailEnabled"
+          class="subtitle-2 input-placeholder-left pt-1"
+        >
+          <v-text-field
+            v-model="userInfo.email"
+            autofocus
+            tabindex="1"
+            :outlined="outlined"
+            class="mb-1 text-subtitle-2"
+            dir="ltr"
+            flat
+            color="primary"
+            :label="emailTitle"
+            :rules="emailValidation"
+            name="email"
+            type="text"
+            required
+          ></v-text-field>
+        </div>
+        <!-- password  -->
+        <div
+          v-if="passwordEnabled"
+          class="w-100 subtitle-2 input-placeholder-left"
+        >
+          <v-text-field
+            v-model="userInfo.password"
+            tabindex="2"
+            :outlined="outlined"
+            class="text-subtitle-2"
+            dir="ltr"
+            flat
+            color="primary"
+            :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="passwordValidation"
+            :label="passwordTitle"
+            name="password"
+            :type="showPass ? 'text' : 'password'"
+            required
+            @click:append="showPass = !showPass"
+          ></v-text-field>
+        </div>
+        <!------------>
+        <div class="d-flex flex-column flex-sm-row justify-space-between align-start">
           <v-checkbox
             v-if="rememberMeEnabled"
             v-model="userInfo.rememberMe"
             tabindex="3"
-            class="mt-0 float-right"
+            class="mt-0"
             :color="checkBoxColor"
             hide-details
             required
           >
             <template v-slot:label>
-              <span class="text-no-wrap text-truncate">{{$t('components.login.rememberMe')}}</span>
+              <span
+                class="text-no-wrap text-truncate text-caption"
+              > {{ $t('components.login.rememberMe') }} </span>
             </template>
           </v-checkbox>
           <v-btn
-            v-if="forgotPasswordEnabled"
+            class="px-0 forgot-password text-caption"
+            :color="forgotPasswordColor"
             text
-            small
-            class="px-0 float-left text-decoration-underline forgot-password"
-            :to="{ name: forgotPasswordRoute}">
-            {{ forgotPassLinkTitle }}
-          </v-btn>
-        </v-col>
-      </v-row>
-      <!-- login btn -->
-      <v-row
-        class="justify-center py-3 mx-0"
+            @click="$router.push({ name: forgotPasswordRoute })"
+          > {{ forgotPassLinkTitle }} </v-btn>
+        </div>
+        <!-- login btn -->
+        <v-row
+          class="justify-center py-3 py-sm-5 py-md-8 mx-0"
         >
-        <v-btn
-          tabindex="4"
-          type="submit"
-          :width="buttonWidth"
-          :block="isButtonFullWidth"
-          :x-large="isButtonLarge"
-          :disabled="!valid"
-          :loading="isLoading"
-          class="white--text"
-          :color="loginButtonColor">
-          {{ loginButtonTitle }}
-        </v-btn>
-      </v-row>
-      <!-- register link -->
-      <v-row
-        v-if="registerLinkEnabled"
-        class="justify-center pt-6 subtitle-2"
+          <v-btn
+            tabindex="4"
+            type="submit"
+            :width="buttonWidth"
+            :block="isButtonFullWidth"
+            :x-large="isButtonLarge"
+            :disabled="!valid"
+            :loading="isLoading"
+            class="white--text"
+            :color="loginButtonColor"
+          > {{ loginButtonTitle }} </v-btn>
+        </v-row>
+        <!-- register link -->
+        <v-row
+          v-if="registerLinkEnabled"
+          class="justify-center pt-3 subtitle-2"
         >
-        <span class="py-1 pl-1">{{ $t('components.login.notRegister') }}</span>
-        <v-btn
-          text
-          :color="registerLinkColor"
-          small
-          class="px-0 text-decoration-underline"
-          :to="{ name: registerRoute}">
-          {{ $t('components.login.register') }}
-        </v-btn>
-      </v-row>
-    </v-form>
+          <span
+            class="mt-2"
+          > {{ $t('components.login.notRegister') }} </span>
+          <v-btn
+            text
+            class="link-button primary--text text-caption"
+            @click="$router.push({ name: registerRoute })"
+          > {{ $t('components.login.register') }} </v-btn>
+        </v-row>
+      </v-form>
     </v-card>
   </div>
 </template>
@@ -129,12 +122,13 @@
 /**
  * @name login component
  * @description login to site
- * @version 1.0.0
+ * @version 1.0.1
  * @event login - return email and password
  * @property {Boolean} [isDark=false] - Specifies the form theme,
  * @property {String} [loginButtonTitle] - Specifies the title of the login button,
  * @property {String} [isButtonFullWidth] - Expands the login button to 100% of available space,
  * @property {String} [loginButtonColor='blue darken-2'] - Specifies the color of the login button,
+ * @property {String} [forgotPasswordColor='orange lighten-1'] - Specifies the color of the login button,
  * @property {String} [registerLinkColor='blue darken-2'] - Specifies the color of the registration link,
  * @property {String} [checkBoxColor='blue darken-2'] - Specifies the color of the checkbox,
  * @property {String} [registerRoute='login'] - Specifies the URL of the login page,
@@ -157,7 +151,7 @@
  * @property {String} [passwordPatternRegex] - validation regex
  * @property {String} [passwordPatternMessage] - validation regex message
  * @property {Boolean} [solo=true] - input theme is solo
- * @property {Boolean} [outlined=false] - input theme is outlined
+ * @property {Boolean} [outlined=true] - input theme is outlined
  * @property {Boolean} [iconEnabled=true]
  * @property {Boolean} [passwordPatternEnabled=true] - if value is false , regex validation disable,
  * @property {String} [passwordPatternRegex] - validation regex,
@@ -198,7 +192,7 @@ export default {
     },
     outlined: {
       type: Boolean,
-      default: false,
+      default: true,
       required: false
     },
     isDark: {
@@ -223,6 +217,11 @@ export default {
       default () {
         return this.$t('components.login.forgotPassword')
       },
+      required: false
+    },
+    forgotPasswordColor: {
+      type: String,
+      default: 'orange lighten-1',
       required: false
     },
     loginButtonColor: {
@@ -373,7 +372,7 @@ export default {
       userInfo: {
         password: '',
         email: '',
-        rememberMe: true
+        rememberMe: false
       },
       showPass: false,
       passwordRules: {
@@ -415,103 +414,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  .login-component {
-    $active-color : #26a69a;
-    $input-text-color : #424242;
-    $placeholder-text : #a3a3a3;
-    $text-color-dark : #9c9c9c;
-    $error-text : #cc4b4b;
-    $input-color : #F3F7F9;
-
-    .v-text-field .v-input__slot {
-      background: $input-color !important;
-    }
-    .v-input input::placeholder {
-      color: $placeholder-text !important;
-    }
-    .v-input input {
-      color: $input-text-color !important;
-    }
-    .form-title {
-      font-size : 20px;
-    }
-    .v-ripple__animation{
-      opacity: 0 !important;
-    }
-
-    .v-btn {
-      letter-spacing: 0;
-      &:before , &.v-btn--active {
-        background-color: transparent !important;
-      }
-    }
-    .theme--dark {
-      &.v-card {
-        color: $text-color-dark;
-        i {
-           color: $text-color-dark;
-        }
-      }
-      .v-icon {
-        color: $text-color-dark;
-      }
-      .form-title {
-        color : white;
-      }
-    }
-    .forgot-password {
-      color : $error-text !important;
-      text-decoration : underline;
-      &:before{
-        background: transparent !important;
-      }
-    }
-
-    .v-text-field--placeholder{
-      font-size: 12px;
-    }
-    .input-placeholder-left{
-      input {
-        text-align: left;
-      }
-    }
-    .v-text-field--solo {
-      &.error--text {
-        .v-input__slot{
-          border: 2px solid !important;
-        }
-      }
-    }
-    .v-text-field .v-input__slot {
-      border-radius: 5px !important;
-    }
-    .v-input--checkbox {
-      .v-label {
-        font-size: 12px !important;
-      }
-    }
-    .v-application--is-rtl .v-input--selection-controls__input {
-      margin-left: 15px !important;
-    }
-
-    .v-messages {
-      min-height: 18px !important;
-    }
-
-    .v-text-field__details {
-      padding: 0 !important;
-      .error--text {
-        display: flex;
-        align-items: center;
-        &:before {
-          content: "\F0026";
-          font: normal normal normal 24px/1 "Material Design Icons";
-          font-size: 18px;
-          padding-left : .5rem;
-        }
-      }
-    }
-  }
-</style>

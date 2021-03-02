@@ -35,9 +35,14 @@
       </span>
       </v-card>
       <sidebar-list />
-      <v-divider class="d-block d-sm-none"></v-divider>
+      <portal-target
+        class="mt-auto mb-5 align-self-center"
+        name="layoutPanel_navigationDrawerAfterSidebarItems"
+        :slot-props="{isMini: drawerIsMini}"
+      ></portal-target>
+      <v-divider class="d-block d-md-none"></v-divider>
       <v-list
-        class="d-block d-sm-none"
+        class="d-block d-md-none"
         dense>
         <v-list-item
           v-for="(item, index) in memberTerritoryMenus"

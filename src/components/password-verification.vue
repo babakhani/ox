@@ -29,6 +29,7 @@
           name="password"
           :type="showPass ? 'text' : 'password'"
           required
+          dir="ltr"
           @click:prepend-inner="showPass = !showPass"
         ></v-text-field>
       </div>

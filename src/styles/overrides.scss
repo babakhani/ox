@@ -467,3 +467,33 @@
     letter-spacing: normal;
   }
 }
+
+.sidebarContent > .v-navigation-drawer__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-component,
+.register-component {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #FFF;
+  }
+  .v-btn {
+    &.v-btn--text {
+      text-decoration: underline !important;
+      &:before {
+        background-color: transparent !important;
+      }
+      & .v-ripple__container {
+        color: transparent !important;
+      }
+    }
+  }
+}

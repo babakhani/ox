@@ -5,6 +5,7 @@
         v-for="(item, index) in innerItems"
         :key="'sidebar-list-item-' + index"
         link
+        exact
         :to="item.path"
         >
         <v-list-item-action>

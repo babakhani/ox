@@ -22,7 +22,7 @@
           <v-stepper-step
             :key="`${n}-step`"
             :step="n"
-            :rules="[() => n !== 2 ? true : stepper.step2.isValid]"
+            :rules="[() => n !== 2 ? true : stepper.current === n ? stepper.step2.isValid : true]"
             :complete="stepper.current > n"
           >
             {{ $t('pages.stepper.step' + n) }}

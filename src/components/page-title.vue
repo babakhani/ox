@@ -1,11 +1,13 @@
 <template>
-  <div class="page-title-component d-flex flex-xxs-column flex-xs-row justify-content-between align-items-center w-100">
-    <h2
-      class="h4 py-3 pt-0 mb-0"
-    >
-      {{ title }}
-    </h2>
-    <slot name="status"></slot>
+  <div class="page-title-component d-flex flex-column flex-sm-row justify-content-between align-items-center w-100 mb-3">
+    <div class="d-flex flex-row pb-3 pb-sm-0">
+      <h2
+        class="h4"
+      >
+        {{ title }}
+      </h2>
+      <slot name="status"></slot>
+    </div>
     <v-spacer></v-spacer>
     <slot></slot>
   </div>
