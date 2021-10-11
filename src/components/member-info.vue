@@ -49,7 +49,7 @@ export default {
   props: {
     avatar: {
       type: String,
-      required: true
+      required: false
     },
     name: {
       type: String,
@@ -57,11 +57,11 @@ export default {
     },
     email: {
       type: String,
-      required: true
+      required: false
     },
     description: {
       type: String,
-      required: true
+      required: false
     }
   }
 }

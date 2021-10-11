@@ -7,7 +7,7 @@ export default (APP_CONFIG) => {
     let result = null
     if (date) {
       const newDate = new Date(date)
-      result = new PersianDate(newDate).format(APP_CONFIG.localeDateFormat || 'LLLLL')
+      result = new PersianDate(newDate).format(APP_CONFIG.localeDateFormat || 'HH:mm YYYY/MM/DD')
     }
     return result
   })
@@ -15,7 +15,7 @@ export default (APP_CONFIG) => {
     let result = null
     if (date) {
       const newDate = new Date(date)
-      result = new PersianDate(newDate).format(APP_CONFIG.localeDateTimeFormat || 'LLLLL')
+      result = new PersianDate(newDate).format(APP_CONFIG.localeDateTimeFormat || ' HH:mm YYYY/MM/DD')
     }
     return result
   })

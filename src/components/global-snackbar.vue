@@ -2,6 +2,7 @@
   <div class="global-snackbar-component">
     <v-snackbar
       v-model="show"
+      :top="true"
       :color="color"
       content-class="text-center"
       >
