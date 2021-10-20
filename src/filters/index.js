@@ -15,8 +15,19 @@ export default (APP_CONFIG) => {
     let result = null
     if (date) {
       const newDate = new Date(date)
-      result = new PersianDate(newDate).format(APP_CONFIG.localeDateTimeFormat || ' HH:mm YYYY/MM/DD')
+      result = new PersianDate(newDate).format(APP_CONFIG.localeDateTimeFormat || 'HH:mm YYYY/MM/DD')
     }
     return result
+  })
+  Vue.filter('dateWeekDayFullName', (date) => {
+    let result = null
+    if (date) {
+      const newDate = new Date(date)
+      result = new PersianDate(newDate).format(APP_CONFIG.localeDateTimeFormat || 'dddd')
+    }
+    return result
+  })
+  Vue.filter('roundNumber', (input) => {
+    return parseInt(input) 
   })
 }
