@@ -3,6 +3,14 @@ import Vue from 'vue'
 import PersianDate from 'persian-date'
 
 export default (APP_CONFIG) => {
+  Vue.filter('shortDate', (date, hasTime) => {
+    let result = null
+    if (date) {
+      const newDate = new Date(date)
+      result = new PersianDate(newDate).format('YYYY/MM/DD')
+    }
+    return result
+  })
   Vue.filter('date', (date, hasTime) => {
     let result = null
     if (date) {
