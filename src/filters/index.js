@@ -44,6 +44,6 @@ export default (APP_CONFIG) => {
     return result
   })
   Vue.filter('roundNumber', (input) => {
-    return parseInt(input) 
+    return parseInt(input)
   })
 }

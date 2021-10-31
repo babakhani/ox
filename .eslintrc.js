@@ -18,6 +18,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'new-cap': 0,
+    'no-extend-native': 0,
     'no-eval': [2, { allowIndirect: true }]
   },
   overrides: [
