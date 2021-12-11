@@ -3,13 +3,15 @@ export default {
   state: {
     content: '',
     color: '',
-    show: ''
+    show: '',
+    closable: ''
   },
   mutations: {
     showMessage (state, payload) {
       state.content = payload.content
       state.color = payload.color
       state.show = true
+      state.closable = payload.closable
     }
   },
   actions: {

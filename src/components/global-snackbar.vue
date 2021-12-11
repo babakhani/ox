@@ -7,6 +7,21 @@
       content-class="text-center"
       >
       {{ message }}
+      <template 
+        v-if="closable"
+        v-slot:action="{ attrs }"
+        >
+        <v-btn
+          text
+          icon
+          v-bind="attrs"
+          @click="show = false"
+          >
+          <v-icon>
+            mdi-close
+          </v-icon>
+        </v-btn>
+      </template>
     </v-snackbar>
   </div>
 </template>
@@ -22,7 +37,8 @@ export default {
     return {
       show: false,
       message: '',
-      color: ''
+      color: '',
+      closable: true
     }
   },
   created () {
@@ -31,6 +47,7 @@ export default {
         this.color = state.snackbar.color
         this.message = state.snackbar.content
         this.show = true
+        this.closable = state.snackbar.closable
       }
     })
   }
