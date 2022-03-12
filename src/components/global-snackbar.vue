@@ -2,6 +2,7 @@
   <div class="global-snackbar-component">
     <v-snackbar
       v-model="show"
+      :timeout="timeout"
       :top="true"
       :color="color"
       content-class="text-center"
@@ -38,6 +39,7 @@ export default {
       show: false,
       message: '',
       color: '',
+      timeout: 4000,
       closable: true
     }
   },
@@ -48,6 +50,7 @@ export default {
         this.message = state.snackbar.content
         this.show = true
         this.closable = state.snackbar.closable
+        this.timeout = state.snackbar.timeout
       }
     })
   }
